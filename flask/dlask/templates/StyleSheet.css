@@ -1,0 +1,30 @@
+.div-1{
+  width: auto;
+  height: auto;
+  background-color: seagreen;
+}
+
+.div-2 {
+    width: 200px;
+    height: 200px;
+    background-color: seagreen;
+    overflow: visible;
+  }
+
+table{
+    width: 100px;
+    overflow: scroll;
+    empty-cells: show;
+    border-collapse:collapse;
+}
+
+table, th, td {
+    width: 100px;
+    border: 1px solid rgb(0, 0, 0);
+    }
+
+form{
+    border: 1px solid rgb(0, 0, 0);
+    background-color: rgb(43, 138, 24);
+    overflow: scroll;
+}
