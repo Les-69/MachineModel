@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="../static/css/prediction.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <title>Bootstrap Form</title>
+  </head>
+ 
+  <body>
+
+    <header>
+    <!--  <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand">
+            <img src="../images/ccs_logo.png" alt="CCS Logo" width="70" height="70" class="d-inline-block align-text-center">
+            Bootstrap
+          </a>
+        </div>
+      </nav> 
+    -->
+
+      <a class="navbar-brand mx-1 mt-5">
+          <img src="../static/img/ccs_logo.png" alt="Bootstrap" width="70" height="70">
+      </a>
+
+  <!--    <section class="menu mt-5 fw-semibold">
+          <ul class="menu-list">
+              <li>About Us</li>
+          </ul>
+
+          <button>
+              <i class="fas fa-times"></i>
+              <i class="fas fa-bars"></i>
+          </button>
+      </section> 
+  -->
+    </header>
+    
+    <div class="container mt-5">
+      <div class="class my-5">
+        <h3>Predicting Attrition</h3>
+      </div>
+      <div class="mx-auto">
+        {% if prediction == 0%}
+          <h3 style="color:red;" class="pb-3 text-center">The student is at risk in dropping the whole school year</h3>
+        {% endif %}
+        {% if prediction == 1%}
+          <h3 style="color:green;" class="pb-3 text-center">The student is not at risk in dropping the whole school year</h3>
+        {% endif %}
+      </div>
+          <form action="{{url_for('result_predict')}}" method="POST" autocomplete="off" class="row g-3">
+            <div class="col-md-3">
+              <label for="Age" class="form-label">Age</label>
+              <input type="text" class="form-control" name="Age" id="Age" required>
+            </div>
+
+            <div class="col-md-3">
+              <label for="fs" class="form-label">Financial Status</label>
+              <select name="fs" id="fs" class="form-select" required>
+                {% for o in fs %}
+                <option value="" selected hidden disabled>Choose...</option>
+                <option value="{{ o.Financial_Status }}">{{ o.Financial_Status }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="col-md-3">
+              <label for="hal" class="form-label">Has a Laptop</label>
+              <select name="hal" id="hal" class="form-select" required>
+                {% for o in hal %}
+                <option value="" selected hidden disabled>Choose...</option>
+                <option value="{{ o.Has_a_laptop }}">{{ o.Has_a_laptop }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="col-md-3">
+              <label for="ic" class="form-label">Type of Internet Connection</label>
+              <select name="ic" id="ic" class="form-select" required>
+                {% for o in ic %}
+                <option value="" selected hidden disabled>Choose...</option>
+                <option value="{{ o.Internet_Connection }}">{{ o.Internet_Connection }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="col-md-3">
+              <label for="cc100" class="form-label">CC100</label>
+              <select name="cc100" id="cc100" class="form-select" required>
+                {% for o in cc100 %}
+                <option value="" selected hidden disabled>Choose...</option>
+                <option value="{{ o.CC100 }}">{{ o.CC100 }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="col-md-3">
+              <label for="cc101" class="form-label">CC101</label>
+              <select name="cc101" id="cc101" class="form-select" required>
+                {% for o in cc101 %}
+                <option value="" selected hidden disabled>Choose...</option>
+                <option value="{{ o.CC101 }}">{{ o.CC101 }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="col-md-3">
+              <label for="cc102" class="form-label">CC102</label>
+              <select name="cc102" id="cc102" class="form-select" required>
+                {% for o in cc102 %}
+                <option value="" selected hidden disabled>Choose...</option>
+                <option value="{{ o.CC102 }}">{{ o.CC102 }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="col-md-3">
+              <label for="csit" class="form-label">CC111/IT112</label>
+              <select name="csit" id="csit" class="form-select" required>
+                {% for o in csit %}
+                <option value="" selected hidden disabled>Choose...</option>
+                <option value="{{ o.csit }}">{{ o.csit }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+              <form class="row g-3">
+                <div class="col-md-3">
+                  <label for="EPG" class="form-label">English Proficiency Grade</label>
+                  <input type="text" class="form-control" name="EPG" id="EPG" required>
+                </div>
+
+              <form class="row g-3">
+                <div class="col-md-3">
+                  <label for="RCG" class="form-label">Reading Comprehension Grade</label>
+                  <input type="text" class="form-control" name="RCG" id="RCG" required>
+                </div>
+                  
+            <div class="col-md-3">
+              <label for="SPG" class="form-label">Science Process Grade</label>
+              <input type="text" class="form-control" name="SPG" id="SPG" required>
+            </div>
+
+            <div class="col-md-3">
+              <label for="QG" class="form-label">Quantitative Grade</label>
+              <input type="text" class="form-control" name="QG" id="QG" required>
+            </div>
+
+            <div class="col-md-3">
+              <label for="AG" class="form-label">Abstract Grade</label>
+              <input type="text" class="form-control" name="AG" id="AG" required>
+            </div>
+
+            <div class="col-md-3">
+              <label for="CET" class="form-label">CET OAPR</label>
+              <input type="text" class="form-control" name="CET" id="CET" required>
+            </div>
+
+            <div class="col-md-3">
+              <label for="SHS-GPA" class="form-label">SHS/HS Grade</label>
+              <input type="text" class="form-control" name="SHS-GPA" id="SHS-GPA" required>
+            </div>
+
+            <div class="col-md-3">
+              <label for="strand" class="form-label">SHS Strand</label>
+              <select name="strand" id="strand" class="form-select" required>
+                {% for o in strand %}
+                <option value="" selected hidden disabled>Choose...</option>
+                <option value="{{ o.SHS_Strand }}">{{ o.SHS_Strand }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="col-md-6">
+              <label for="gender" class="form-label">Sex</label>
+              <select name="gender" id="gender" class="form-select" required>
+                {% for o in gender %}
+                <option value="" selected hidden disabled>Choose...</option>
+                <option value="{{ o.Gender }}">{{ o.Gender }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="col-md-6">
+              <label for="year" class="form-label">Year Started the Program</label>
+              <select name="year" id="year" class="form-select" required>
+                {% for o in year %}
+                <option value="" selected hidden disabled>Choose...</option>
+                <option value="{{ o.Year_Started }}">{{ o.Year_Started }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            
+            <div class="gap-2 col-6 mx-auto text-center mb-4">
+              <a href="{{ url_for('index') }}" class="btn btn-success"> 
+                
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                Home
+              </a>
+
+              <button type="submit" class="btn btn-success">Submit</button>
+
+            </div>
+          </form>
+          
+    </div>
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+  
+  </body>
+</html>
